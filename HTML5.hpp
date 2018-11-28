@@ -3,6 +3,7 @@
 
 
 //This file and HTML5definition is trying to make the docMaker into a html class with different funcitons
+//Currently nothing is writing to a file
 #include <string>
 using std::string;
 using std::getline;
@@ -16,11 +17,11 @@ struct HTML
 	HTML();
 	string _phrase;
 	string _buttonName;
-	void section(int);
+	void section();
 	void head(string titleofWebsite, string CssFilename);
 	void body();
-	void header(int,int);
-	void nav(int);
+	void header();
+	void nav();
 	//string fontSize(int, string phrase); //not sure what to call this
 	string _htmlDeclaration = "<!DOCTYPE html>";
 	string _htmlHeader = "<html lang=\"en\" dir=\"ltr\">";
