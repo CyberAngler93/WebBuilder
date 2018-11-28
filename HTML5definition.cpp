@@ -1,39 +1,89 @@
 #include "HTML5.hpp"
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+
 
 HTML::HTML()
 {
 	string title;
 	string css;
+	cout << "[Enter the title of the website]" << endl;
+	cin >> title;
+	cout << "[Enter the filepath of the css file]" << endl;
+	cin >> css;
+	cout << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>" << endl;
 	head(title, css);
 	body();
+	cout << "</html>" << endl;
 }
 
-string HTML::head(string titleofWebsite, string Cssfilename) //This is the beginning of the code that is after the HTML declaration
+
+void HTML::head(string titleofWebsite, string Cssfilename) //This is the beginning of the code that is after the HTML declaration
 {                                                                           //and the "html lang=....
-	return  "<head>\n" + _meta + "<title>" + titleofWebsite + "</title> \n" + "<link rel= \"stylesheet\" href=\"" + Cssfilename + "\"> \n" + "</head>\n";
+	cout <<  "<head>\n" << _meta << "\n<title>" << titleofWebsite << "</title> \n" << "<link rel= \"stylesheet\" href=\"" << Cssfilename << "\"> \n" << "</head>\n";
 }
 
-string HTML::body()
+void HTML::body()
 {
-	//Header()
-	//Section()+
+	int f;
+	int g;
+	cout << "[Enter the number of tabs]" << endl;
+	cin >> f;
+	cout << "[Enter 0 for paragraph or 2 for image]" << endl;
+	cin.ignore();
+	cin >> g;
+	cout << "<body>" << endl;
+	header(f,g);
+	section(g);
+	cout << "</body>" << endl;
 }
 
-string HTML::header()
+void HTML::header(int numberOfTabs, int option)
 {
-	//Section()
-
+	cout << "<header>" << endl;
+	//For starters. Do pick actual varibles later; 
+	section(option);
+	nav(numberOfTabs);
+	cout << "</header>" << endl;
 }
 
-string HTML::section()
+void HTML::section(int option)
 {
-	//bulk of website:
-	//1)paragraphs
-	//2)nav
-	//3)images
+	cout << "<section>" << endl;
+	if (option == PARAGRAPH)
+	{
+		cout << "<p>" << _phrase << "</p>" << endl;
+	}
+	else if (option == IMAGE)   //COME BACK TO THIS LATER
+	{
+		cout << "Uh oh";
+	}
+	cout << "</section>" << endl;
 }
 
-string HTML::fontSize(int size, string phrase)
+//_phrase(phrase), 
+void HTML::nav(int numOfTabs)
 {
-	return "<h" + size + '>' + phrase + "</h>";
+	cin.ignore();
+	cout << "<nav>" << endl;
+	for (int i = 0; i < numOfTabs; i++)
+	{
+		cout << "[Enter the name of a button]" << endl;
+		getline(cin, _buttonName);
+		vectOfTabs.push_back(_1stHalfButtoning + _buttonName + _2ndHalfButtoning);
+	}
+	string stringOfNames;
+	for (auto i : vectOfTabs)
+	{
+		stringOfNames += i;
+	}
+	cout << stringOfNames;
+	cout << "</nav>" << endl;
 }
+
+//string HTML::fontSize(int size, string phrase)
+//{
+//	return "<h" + size + '>' + phrase + "</h>";
+//}
