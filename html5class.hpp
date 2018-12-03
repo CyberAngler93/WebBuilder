@@ -1,4 +1,8 @@
-
+#ifndef HTML5CLASS_HPP_INCLUDED
+#define HTML5CLASS_HPP_INCLUDED
+#include <string>
+#include <vector>
+#include <ofstream>
 
 
 class Head{
@@ -7,16 +11,18 @@ class Head{
   std::string getTile();
   std::string getFile();
   void setTitle(std::string);
+  std::ofstream print(std::ofstream & );
 private:
-  std::string _headTagOpen = "<head>";
+  std::string _headTagOpen;
   std::string _headTitle;
   std::string _cssFile;
-  std::string _meta = "<meta charset=\"utf-8\">";
-  std::string _headTagClose = "</head>";
+  std::string _meta ;
+  std::string _headTagClose;
 };
 
 class Section{
 public:
+    std::ofstream print(std::ofstream &);
   //this is for section with only title and paragraph
   Section(std::string);
   //this is for section with title and image
@@ -28,59 +34,20 @@ private:
   std::string _sectionTitle;
   std::string _sectionImage;
 };
-
 class Nav{
 public:
-
-
-private:
-
-
-
-
-};
-
-
-class Foot{
-
-
-
-
-
-};
-
-
-
-
-
-
-
-class Header(){
-public:
-  Header();
-  ~Header();
-  print();
-
-private:
-  string _title;
-};
-class Nav(){
-public:
-  Nav();
+    std::ofstream print (std::ofstream &);
+  Nav(std::vector<std::string>);
   ~Nav();
-  print();
 private:
-  int _numberOfNav;
   std::vector<std::string> _titleVector;
+  std::vector<std::string> _linkVector;
+  std::string _navTagOpen;
+  std::string _navTagClose;
+  std::string _navFormat1;
+  std::string _navFormat2;
+  std::string _navFormat3;
+  int _navLen = 0;
 };
-class Section(){
-public:
-  Section();
-  ~Section();
-  print();
-private:
-  string _title;
 
-
-
-};
+#endif
