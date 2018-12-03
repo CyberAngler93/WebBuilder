@@ -2,16 +2,17 @@
 #define HTML5CLASS_HPP_INCLUDED
 #include <string>
 #include <vector>
-#include <ofstream>
+#include <fstream>
 
 
 class Head{
+friend std::ostream & operator <<(std::ostream & os, const Head & head);
+public:
   Head(std::string , std::string);
   ~Head();
-  std::string getTile();
+  std::string getTitle();
   std::string getFile();
   void setTitle(std::string);
-  std::ofstream print(std::ofstream & );
 private:
   std::string _headTagOpen;
   std::string _headTitle;
@@ -21,8 +22,8 @@ private:
 };
 
 class Section{
+  friend std::ostream & operator <<(std::ostream & os, const Section & section);
 public:
-    std::ofstream print(std::ofstream &);
   //this is for section with only title and paragraph
   Section(std::string);
   //this is for section with title and image
@@ -35,8 +36,8 @@ private:
   std::string _sectionImage;
 };
 class Nav{
+  friend std::ostream & operator <<(std::ostream & os, const Nav & nav);
 public:
-    std::ofstream print (std::ofstream &);
   Nav(std::vector<std::string>);
   ~Nav();
 private:
