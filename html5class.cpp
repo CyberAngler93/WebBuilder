@@ -57,7 +57,7 @@ Section::Section(std::string userTitle,std::string userImage){
 
 std::ostream & operator <<(std::ostream & os, const Nav & nav){
   os << nav._navTagOpen << "\n";
-  for (int i  = 0; i <= nav._navLen; i++){
+  for (int i  = 0; i < nav._navLen; i++){
   os << nav._navFormat1 << nav._linkVector[i] << nav._navFormat2 << nav._titleVector[i] << nav._navFormat3 << "\n";
   }
   os <<nav._navTagClose << "\n";
@@ -67,7 +67,7 @@ std::ostream & operator <<(std::ostream & os, const Nav & nav){
 Nav::Nav(const std::vector<std::string> & userNav){
     int len = 0;
     len = userNav.size();
-    for(int i = 1; i <= len;  i++){
+    for(int i = 1; i <= len+1;  i++){
         if(i%2 == 1){
             _titleVector.push_back(userNav[i]);
         }

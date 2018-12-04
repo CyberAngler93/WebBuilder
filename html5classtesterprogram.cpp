@@ -15,7 +15,12 @@ int main(){
   std::cout << b << "\n";
   std::vector<std::string> myVector;
   for(int i = 0; i <= 20; i++){
-    myVector.push_back("hello");
+    if(i % 2 == 1){
+      myVector.push_back("Title");
+    }
+    else{
+      myVector.push_back("Link");
+    }
   }
   Nav c(myVector);
   std::cout << c << "\n";
