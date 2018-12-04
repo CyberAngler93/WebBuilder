@@ -1,4 +1,4 @@
-/*#include "HTML5.hpp"
+#include "HTML5.hpp"
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -15,7 +15,7 @@ using std::ofstream;
 //NEED TO INSERT STRINGS INTO VECTOR AS LINK then TITLE
 ofstream writingIndex("index.html");
 
-HTML::HTML() //This is the function that starts the html writing process
+void HTML::print() //This is the function that starts the html writing process
 {
 	cout << "Welcome to Web Builder!" << endl;
 	string title;
