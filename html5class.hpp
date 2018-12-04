@@ -5,9 +5,19 @@
 #include <fstream>
 
 
-class Head: public HTML{
-friend std::ostream & operator <<(std::ostream & os, const Head & head);
+
+class HTML {
 public:
+	virtual void print(std::ostream &);
+	virtual ~HTML();
+private:
+};
+
+
+
+class Head: public HTML{
+public:
+	void print(std::ostream &)override;
   Head(std::string,std::string);
   ~Head();
   std::string getTitle();
@@ -21,29 +31,25 @@ private:
   std::string _headTagClose;
 };
 
-class HTML {
-public:
-	virtual void print(std::vector<HTML>) = 0;
-};
-
-
 class Section: public HTML{
-  friend std::ostream & operator <<(std::ostream & os, const Section & section);
 public:
+	void print(std::ostream &)override;
   //this is for section with only title and paragraph
   Section(std::string);
   //this is for section with title and image
   Section(std::string,std::string);
+	Section(std::string,std::string,int)
   ~Section();
 private:
+	std::string _sectionPostion;
   std::string _sectionTagOpen;
   std::string _sectionTagClose;
   std::string _sectionTitle;
   std::string _sectionImage;
 };
 class Nav: public HTML{
-  friend std::ostream & operator <<(std::ostream & os, const Nav & nav);
 public:
+	void print(std::ostream &)override;
   Nav(const std::vector<std::string> &);
   ~Nav();
 private:
@@ -56,5 +62,7 @@ private:
   std::string _navFormat3;
   int _navLen = 0;
 };
+
+std::ostream & operator<<(std::ostream & , HTML &);
 
 #endif

@@ -1,17 +1,21 @@
 #include "html5class.hpp"
 
-void HTML::print(std::vector<HTML>)
-{
+HTML::~HTML(){
 
 }
-std::ostream & operator <<(std::ostream & os, const Head & head){
-  os << head._headTagOpen << "\n";
-  os <<  head._meta << "\n";
-  os << "<title>" << head._headTitle << "</title>\n";
-  os << "<link rel=\"stylesheet" << "\" href=" << head._cssFile << "\">\n";
-  os << head._headTagClose << "\n";
-  os << " <body>\n";
+
+
+std::ostream & operator<<(std::ostream & os, HTML & html){
+  html.print(os);
   return os;
+}
+void Head::print(std::ostream & os){
+  os << _headTagOpen << "\n";
+  os << _meta << "\n";
+  os << "<title>" << _headTitle << "</title>\n";
+  os << "<link rel=\"stylesheet" << "\" href=" << _cssFile << "\">\n";
+  os << _headTagClose << "\n";
+  os << " <body>\n";
 }
 Head::~Head(){
 
@@ -33,17 +37,17 @@ void Head::setTitle(std::string userTitle){
     _headTitle = userTitle;
 }
 std::string Head::getFile(){
-    return this->_cssFile;
+    return _cssFile;
 }
 std::string Head::getTitle(){
-    return this->_headTitle;
+    return _headTitle;
 }
-std::ostream & operator <<(std::ostream & os, const Section & section){
-  os << section._sectionTagOpen << "\n";
-  os << "<h1>"  << section._sectionTitle << "</h1>\n";
+void Section::print(std::ostream & os){
+  os << _sectionTagOpen << "\n";
+  os << "<h1>"  << _sectionTitle << "</h1>\n";
   os << "This needs to be fixed for images and texts!\n";
-  os << section._sectionTagClose << "\n";
-  return os;
+  os << _sectionTagClose << "\n";
+
 }
 
 Section::Section(std::string userTitle){
@@ -59,13 +63,12 @@ Section::Section(std::string userTitle,std::string userImage){
     _sectionTagClose = "</section>";
 }
 
-std::ostream & operator <<(std::ostream & os, const Nav & nav){
-  os << nav._navTagOpen << "\n";
-  for (int i  = 0; i < nav._navLen; i++){
-  os << nav._navFormat1 << nav._linkVector[i] << nav._navFormat2 << nav._titleVector[i] << nav._navFormat3 << "\n";
+void Nav::print(std::ostream & os){
+  os << _navTagOpen << "\n";
+  for (int i  = 0; i < _navLen; i++){
+  os << _navFormat1 << _linkVector[i] << _navFormat2 << _titleVector[i] << _navFormat3 << "\n";
   }
-  os <<nav._navTagClose << "\n";
-  return os;
+  os << _navTagClose << "\n";
 }
 
 Nav::Nav(const std::vector<std::string> & userNav){
