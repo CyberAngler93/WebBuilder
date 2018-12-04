@@ -17,6 +17,7 @@ struct HTML
 	HTML();
 	string _phrase;
 	string _buttonName;
+	string _title;
 	void section();
 	void head(string titleofWebsite, string CssFilename);
 	void body();
@@ -26,9 +27,9 @@ struct HTML
 	string _htmlDeclaration = "<!DOCTYPE html>";
 	string _htmlHeader = "<html lang=\"en\" dir=\"ltr\">";
 	string _meta = "<meta charset=\"utf-8\">";
-	string _1stHalfButtoning = "<a href='#'>";
+	string _1stHalfButtoning = "<a href='#Trying'>";
 	string _2ndHalfButtoning = "</a>\n";
-	enum { PARAGRAPH, NAV, IMAGE };
+	enum { PARAGRAPH, IMAGE };
 	vector<string> vectOfTabs;
 };
 
