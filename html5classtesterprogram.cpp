@@ -14,12 +14,12 @@ int main(){
   Section b("Hi");
   std::cout << b << "\n";
   std::vector<std::string> myVector;
-  for(int i = 0; i <= 20; i++){
+  for(int i = 1; i <= 20; i++){
     if(i % 2 == 1){
-      myVector.push_back("Title");
+      myVector.push_back("Link");
     }
     else{
-      myVector.push_back("Link");
+      myVector.push_back("Title");
     }
   }
   Nav c(myVector);

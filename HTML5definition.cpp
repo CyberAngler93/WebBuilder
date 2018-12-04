@@ -1,4 +1,4 @@
-#include "HTML5.hpp"
+/*#include "HTML5.hpp"
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -6,10 +6,13 @@ using std::endl;
 #include <fstream>
 using std::ofstream;
 #include <windows.h>
+#include "html5class.hpp"
 //Currently we need to write the code for a person to enter an image
 //We need to make sure that the user entered an actual path to a css file and eventually an image file
 //We need to ask the user for a filepath for the page of the webpage so the html can know where to open (these would be .html files)
 
+
+//NEED TO INSERT STRINGS INTO VECTOR AS LINK then TITLE
 ofstream writingIndex("index.html");
 
 HTML::HTML() //This is the function that starts the html writing process
@@ -116,4 +119,4 @@ void HTML::nav()
 //string HTML::fontSize(int size, string phrase)
 //{
 //	return "<h" + size + '>' + phrase + "</h>";
-//}
+//}*/

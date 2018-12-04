@@ -1,10 +1,14 @@
 #include "html5class.hpp"
 
+void HTML::print(std::vector<HTML>)
+{
+
+}
 std::ostream & operator <<(std::ostream & os, const Head & head){
   os << head._headTagOpen << "\n";
   os <<  head._meta << "\n";
   os << "<title>" << head._headTitle << "</title>\n";
-  os << "<link rel= \"" << head._cssFile << "\" href=\"style.css\">\n";
+  os << "<link rel=\"stylesheet" << "\" href=" << head._cssFile << "\">\n";
   os << head._headTagClose << "\n";
   os << " <body>\n";
   return os;
@@ -67,7 +71,7 @@ std::ostream & operator <<(std::ostream & os, const Nav & nav){
 Nav::Nav(const std::vector<std::string> & userNav){
     int len = 0;
     len = userNav.size();
-    for(int i = 1; i <= len+1;  i++){
+    for(int i = 0; i < len;  i++){
         if(i%2 == 1){
             _titleVector.push_back(userNav[i]);
         }

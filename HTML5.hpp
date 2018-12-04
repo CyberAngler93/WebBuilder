@@ -1,4 +1,4 @@
-#ifndef HTML5_HPP_
+/*#ifndef HTML5_HPP_
 #define HTML5_HPP_
 
 
@@ -33,4 +33,4 @@ struct HTML
 	vector<string> vectOfTabs;
 };
 
-#endif // HTML5_HPP_
+#endif // HTML5_HPP_*/

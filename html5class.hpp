@@ -5,7 +5,7 @@
 #include <fstream>
 
 
-class Head{
+class Head: public HTML{
 friend std::ostream & operator <<(std::ostream & os, const Head & head);
 public:
   Head(std::string,std::string);
@@ -21,7 +21,13 @@ private:
   std::string _headTagClose;
 };
 
-class Section{
+class HTML {
+public:
+	virtual void print(std::vector<HTML>) = 0;
+};
+
+
+class Section: public HTML{
   friend std::ostream & operator <<(std::ostream & os, const Section & section);
 public:
   //this is for section with only title and paragraph
@@ -35,7 +41,7 @@ private:
   std::string _sectionTitle;
   std::string _sectionImage;
 };
-class Nav{
+class Nav: public HTML{
   friend std::ostream & operator <<(std::ostream & os, const Nav & nav);
 public:
   Nav(const std::vector<std::string> &);
