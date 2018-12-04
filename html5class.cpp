@@ -16,14 +16,14 @@ Section::~Section(){
 
 }
 Nav::~Nav(){
-  
+
 }
 Head::Head(std::string userTitle, std::string userStyle){
-std::string _headTagOpen = "  <head>";
-  std::string _headTitle = userTitle;
-  std::string _cssFile = userStyle;
-  std::string _meta = "    <meta charset=\"utf-8\">";
-  std::string _headTagClose = " </head>" ;
+  _headTagOpen = "  <head>";
+  _headTitle = userTitle;
+  _cssFile = userStyle;
+  _meta = "    <meta charset=\"utf-8\">";
+  _headTagClose = " </head>" ;
 }
 void Head::setTitle(std::string userTitle){
     _headTitle = userTitle;

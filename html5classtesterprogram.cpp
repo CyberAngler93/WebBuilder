@@ -1,15 +1,18 @@
 #include "html5class.hpp"
 #include <iostream>
-
+#include <vector>
 
 
 
 
 int main(){
-  Head a("hello","Good");
+  std::string apple = "hello";
+  std::string banna = "goodbye";
+  Head a(banna,apple);
+  a.setTitle("hello");
   std::cout << a << "\n";
-  std::cout << g.getTitle() << "\n";
-
+  Section b("Hi");
+  std::cout << b << "\n";
 
 
 

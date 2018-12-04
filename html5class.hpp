@@ -8,7 +8,7 @@
 class Head{
 friend std::ostream & operator <<(std::ostream & os, const Head & head);
 public:
-  Head(std::string , std::string);
+  Head(std::string,std::string);
   ~Head();
   std::string getTitle();
   std::string getFile();
