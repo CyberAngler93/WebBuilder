@@ -38,7 +38,7 @@ private:
 class Nav{
   friend std::ostream & operator <<(std::ostream & os, const Nav & nav);
 public:
-  Nav(std::vector<std::string>);
+  Nav(const std::vector<std::string> &);
   ~Nav();
 private:
   std::vector<std::string> _titleVector;

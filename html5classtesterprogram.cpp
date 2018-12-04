@@ -13,7 +13,12 @@ int main(){
   std::cout << a << "\n";
   Section b("Hi");
   std::cout << b << "\n";
-
+  std::vector<std::string> myVector;
+  for(int i = 0; i <= 20; i++){
+    myVector.push_back("hello");
+  }
+  Nav c(myVector);
+  std::cout << c << "\n";
 
 
 
