@@ -19,6 +19,9 @@ std::string link;
 std::string command;
 std::string yOrN;
 std::string phrase;
+std::string imageFile;
+int numOfPics;
+int imagePosition;
 int numOfTabs;
 
 //this is the print function defined for outputing our objects to an ofstream
@@ -29,9 +32,11 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 	int secLen = sec.size();
 	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
 	head.print(os);
+	os << "<header>" << std::endl;
 	for(int i = 0; i < navLen; i++){
 		nav[i].print(os);
 	}
+	os << "</header>" << std::endl;
 	for(int i = 0; i < secLen; i++){
 		sec[i].print(os);
 	}
@@ -104,9 +109,17 @@ int main()
 		}
 		else if (yOrN == "image")
 		{
-			std::cout << "somehow you are here and its erroring out" << std::endl;
+			numOfPics++;
+			std::cout << "Enter the file for the picture, be sure to include it in the folder for the html" << std::endl;
+			getline(std::cin, imageFile);
+			std::cout << "Do you want it on the left, center, or right, enter 0, 1, or 2" << std::endl;
+			std::cin >> imagePosition;
+			Section b(title, imageFile, imagePosition);
+			b.setImageId(numOfPics);
+			sections.push_back(b);
+			std::cout << "can't do this yet" << std::endl;
 		}
-
+		std::cin.ignore();
 		std::cout << "Do you want tabs? (y/n)" << std::endl;
 		//while loop for error checking on the input from users becasue users are mean.
 		while(true){

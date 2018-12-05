@@ -46,18 +46,23 @@ public:
 	Section(std::string, std::string, int);
 	~Section();
 	std::string getSectionPostion();
+	void setImageSectPostion(int);
 	std::string getSectionTagOpen();
 	std::string getSectionTagClose();
 	std::string getSectionTitle();
 	void setParagraph(std::string);
+	void setImage(std::string);
+	void setImageId(int);
 private:
 	std::string _sectionPostion;
 	std::string _sectionTagOpen;
+	std::string _sectionImageTagOpen;
 	std::string _sectionTagClose;
 	std::string _sectionTitle;
 	std::string _sectionImage;
 	std::string _paragraph;
 	int _position;
+	int _id;
 };
 class Nav : public HTML {
 public:
@@ -74,18 +79,5 @@ private:
 	std::string _navFormat3;
 	int _navLen = 0;
 };
-
-class Header
-{
-public:
-	Header();
-	~Header();
-	std::string getHeaderOpenTag();
-	std::string getHeaderCloseTag();
-private:
-	std::string _headerOpenTag;
-	std::string _headerCloseTag;
-};
-std::ostream & operator<<(std::ostream &, HTML &);
 
 #endif

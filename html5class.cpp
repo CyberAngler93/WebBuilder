@@ -72,7 +72,7 @@ Section::Section(std::string userTitle) : _sectionTitle(userTitle), _sectionImag
 Section::Section(std::string userTitle, std::string userImage) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
 {}
 
-Section::Section(std::string userTitle, std::string userImage, int position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position)
+Section::Section(std::string userTitle, std::string userImage, int position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position), _sectionImageTagOpen("<section title=\"")
 {}
 
 std::string Section::getSectionPostion()
@@ -97,14 +97,17 @@ std::string Section::getSectionTitle()
 
 void Section::print(std::ostream & os)
 {
-	os << _sectionTagOpen << "\n";
-	os << "<h1>"  << _sectionTitle << "</h1>\n";
 	if (!_sectionImage.empty())
 	{
-		  os << "This needs to be fixed for images!\n";
+		os << _sectionImageTagOpen << _id << "\">\n";
+		os << "<h1>" << _sectionTitle << "</h1>\n";
+		os << "<img src=\"" << _sectionImage <<"\"/>\n";
+		//os << "This needs to be fixed for images!\n";
 	}
 	else if (!_paragraph.empty())
 	{
+		os << _sectionTagOpen << "\n";
+		os << "<h1>" << _sectionTitle << "</h1>\n";
 		os << _paragraph;
 	}
 	//os << "This needs to be fixed for images and texts!\n";
@@ -115,6 +118,22 @@ void Section::setParagraph(std::string phrases)
 {
 	_paragraph += phrases;
 }
+
+void Section::setImageSectPostion(int position)
+{
+	_position = position;
+}
+
+void Section::setImage(std::string file)
+{
+	_sectionImage = file;
+}
+
+void Section::setImageId(int ID)
+{
+	_id = ID;
+}
+
 
 Section::~Section() {
 
@@ -145,26 +164,7 @@ Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _nav
     }
     _navLen = len/2;
 }
+
 Nav::~Nav() {
-
-}
-
-
-
-Header::Header(): _headerOpenTag("<header>"), _headerCloseTag("</header>")
-{}
-
-std::string Header::getHeaderOpenTag()
-{
-	return _headerOpenTag;
-}
-
-std::string Header::getHeaderCloseTag()
-{
-	return _headerCloseTag;
-}
-
-Header::~Header()
-{
 
 }
