@@ -8,9 +8,7 @@
 int main(){
   std::string apple = "hello";
   std::string banna = "goodbye";
-  std::unique_ptr<HTML> a = std::make_unique<Head>(banna,apple);
-  //a.setTitle("hello");
-  //std::cout << a << "\n";
+
   Section b("Hi");
   std::cout << b << "\n";
   std::vector<std::string> myVector;
@@ -23,18 +21,6 @@ int main(){
     }
   }
 Nav c(myVector);
-std::cout << c << "\n";
-std::vector<std::unique_ptr<HTML>> myHtmlObjects;
-myHtmlObjects.push_back(a);
-//myHtmlObjects.push_back(b);
-//myHtmlObjects.push_back(c);
-//Head d = myHtmlObjects[0];
-
-//std::cout << d ;
-  //auto  & c = myHtmlObjects[0];
-  //std::cout << c << "\n";
-
-
 
   return 0;
 }

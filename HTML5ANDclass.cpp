@@ -48,7 +48,7 @@ int main()
 	Head a("Head","Title");
 
 
-	
+
 	ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	return 0;
 }

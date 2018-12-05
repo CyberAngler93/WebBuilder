@@ -8,13 +8,13 @@
 //This is supposed to be here
 class HTML {
 public:
-	void print(std::ostream &);
+	virtual void print(std::ostream &) = 0;
 private:
 };
 
-class Head {
+class Head : public HTML {
 public:
-	void print(std::ostream &);
+	void print(std::ostream &) override;
 	Head(std::string, std::string);
 	~Head();
 	std::string getTitle();
@@ -33,9 +33,9 @@ private:
 	std::string _headTagClose;
 };
 
-class Section {
+class Section : public HTML{
 public:
-	void print(std::ostream &);
+	void print(std::ostream &) override;
 	//this is for section with only title and paragraph
 	Section(std::string);
 	//this is for section with title and image
@@ -54,9 +54,9 @@ private:
 	std::string _sectionTitle;
 	std::string _sectionImage;
 };
-class Nav {
+class Nav : public HTML {
 public:
-	void print(std::ostream &);
+	void print(std::ostream &) override;
 	Nav(const std::vector<std::string> &);
 	~Nav();
 private:
