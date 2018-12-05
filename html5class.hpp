@@ -40,7 +40,8 @@ public:
 	Section(std::string);
 	//this is for section with title and image
 	Section(std::string, std::string);
-	//Section(std::string, std::string, int); This is commented out because I didn't feel like defining it
+	enum Position {LEFT, CENTER, RIGHT};
+	Section(std::string, std::string, int);
 	~Section();
 	std::string getSectionPostion();
 	std::string getSectionTagOpen();
@@ -53,6 +54,7 @@ private:
 	std::string _sectionTagClose;
 	std::string _sectionTitle;
 	std::string _sectionImage;
+	int _position;
 };
 class Nav : public HTML {
 public:

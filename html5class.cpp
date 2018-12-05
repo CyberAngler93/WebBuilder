@@ -4,6 +4,7 @@ std::ostream & operator<<(std::ostream & os, HTML & html){
   html.print(os);
   return os;
 }
+
 void Head::print(std::ostream & os){
   os << _headTagOpen << "\n";
   os << _meta << "\n";
@@ -12,28 +13,30 @@ void Head::print(std::ostream & os){
   os << _headTagClose << "\n";
   os << " <body>\n";
 }
+
 Head::~Head(){
 
 }
+
 Section::~Section(){
 
 }
+
 Nav::~Nav(){
 
 }
-Head::Head(std::string userTitle, std::string userStyle){
-  _headTagOpen = "  <head>";
-  _headTitle = userTitle;
-  _cssFile = userStyle;
-  _meta = "    <meta charset=\"utf-8\">";
-  _headTagClose = " </head>" ;
-}
+
+Head::Head(std::string userTitle, std::string userStyle): _headTagOpen("  <head>"), _headTitle(userTitle), _cssFile(userStyle), _meta("    <meta charset=\"utf-8\">"), _headTagClose(" </head>")
+{}
+
 void Head::setTitle(std::string userTitle){
     _headTitle = userTitle;
 }
+
 std::string Head::getFile(){
     return _cssFile;
 }
+
 std::string Head::getTitle(){
     return _headTitle;
 }
@@ -42,18 +45,22 @@ std::string Head::getHeadTagOpen()
 {
 	return _headTagOpen;
 }
+
 std::string Head::getHeadTitle()
 {
 	return _headTitle;
 }
+
 std::string Head::getCssFile()
 {
 	return _cssFile;
 }
+
 std::string Head::getMeta()
 {
 	return _meta;
 }
+
 std::string Head::getHeadTagClose()
 {
 	return _headTagClose;
@@ -63,18 +70,22 @@ std::string Section::getSectionPostion()
 {
 	return _sectionPostion;
 }
+
 std::string Section::getSectionTagOpen()
 {
 	return _sectionTagOpen;
 }
+
 std::string Section::getSectionTagClose()
 {
 	return _sectionTagClose;
 }
+
 std::string Section::getSectionTitle()
 {
 	return _sectionTitle;
 }
+
 std::string Section::getSectionImage()
 {
 	return _sectionImage;
@@ -88,18 +99,14 @@ void Section::print(std::ostream & os){
 
 }
 
-Section::Section(std::string userTitle){
-    _sectionTitle = userTitle;
-    _sectionImage = "";
-    _sectionTagOpen = "<section>";
-    _sectionTagClose = "</section>";
-}
-Section::Section(std::string userTitle,std::string userImage){
-    _sectionTitle = userTitle;
-    _sectionImage = userImage;
-    _sectionTagOpen = "<section>";
-    _sectionTagClose = "</section>";
-}
+Section::Section(std::string userTitle): _sectionTitle(userTitle), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+{}
+
+Section::Section(std::string userTitle,std::string userImage): _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+{}
+
+Section::Section(std::string userTitle, std::string userImage, int position): _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position)
+{}
 
 void Nav::print(std::ostream & os){
   os << _navTagOpen << "\n";
@@ -109,7 +116,8 @@ void Nav::print(std::ostream & os){
   os << _navTagClose << "\n";
 }
 
-Nav::Nav(const std::vector<std::string> & userNav){
+Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _navTagOpen("<nav>"), _navFormat1("<a href = \""), _navFormat2("\"> "), _navFormat3(" </a>\n")
+{
     int len = 0;
     len = userNav.size();
     for(int i = 0; i < len;  i++){
@@ -120,10 +128,5 @@ Nav::Nav(const std::vector<std::string> & userNav){
         _linkVector.push_back(userNav[i]);
       }
     }
-    _navTagClose = "</nav>";
-    _navTagOpen = "<nav>";
-    _navFormat1 = "<a href = \"";
-    _navFormat2 =  "\"> ";
-    _navFormat3 = " </a>\n";
     _navLen = len/2;
 }

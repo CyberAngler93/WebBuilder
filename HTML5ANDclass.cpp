@@ -13,46 +13,58 @@ int main()
 	std::cin >> css;
 	Head a(title, css);
 	Section b(title);
-	std::string yOrN;
-	std::cout << "Do you want tabs? (y/n)" << std::endl;
-	std::getline(std::cin, yOrN);
-	if (yOrN == "y")
+	std::vector<Nav> navs;
+	std::vector<Section> sections;
+	std::string title;
+	int numberOfTurns = 0;
+	std::string command = "y";
+	while (command == "y")
 	{
-		int numOfTabs;
-		std::string _buttonName;
-		std::string _buttonLink;
-		std::cout << "Enter the number of tabs" << std::endl;
-		std::cin >> numOfTabs;
-		std::vector<std::string> vectOfTabs(numOfTabs*2);
-		std::cin.ignore();
-		for (int i = 0; i < vectOfTabs.size(); i++) //This creates the amount of tabs(or pages) the user wants
+		std::cout << "What is the title of the section?" << std::endl;
+		getline(std::cin, title);
+		Section c(title);
+		std::string yOrN;
+		std::cout << "Do you want tabs? (y/n)" << std::endl;
+		getline(std::cin, yOrN);
+		if (yOrN == "y")
 		{
-			std::cout << "Enter the link of the tab" << std::endl;
-			getline(std::cin, _buttonLink);
-			vectOfTabs.push_back(_buttonLink);
+			int numOfTabs;
+			std::string _buttonName;
+			std::string _buttonLink;
+			std::cout << "Enter the number of tabs" << std::endl;
+			std::cin >> numOfTabs;
+			std::vector<std::string> vectOfTabs;
 			std::cin.ignore();
-			std::cout << "Enter the name of a tab" << std::endl;
-			getline(std::cin, _buttonName);
-			vectOfTabs.push_back(_buttonName);
-			std::cin.ignore();
+			for (int i = 0; i < numOfTabs * 2; i++) //This creates the amount of tabs(or pages) the user wants
+			{
+				std::cout << "Enter the link of the tab" << std::endl;
+				getline(std::cin, _buttonLink);
+				vectOfTabs.push_back(_buttonLink);
+				std::cout << "Enter the name of a tab" << std::endl;
+				getline(std::cin, _buttonName);
+				vectOfTabs.push_back(_buttonName);
+			}
+			Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
+			navs.push_back(nav);
 		}
-		Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
+		else
+		{
+
+		}
+
+		std::cout << "do you want to make another section? (y/n)" << std::endl;
+		getline(std::cin, command);
+		numberOfTurns++;
 	}
-	else
-	{
-	}
 
 
-
-	writingIndex << "</html>" << std::endl;
-	Head a("Head","Title");
-
-
-
-	ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
+	
+	//Part of Print function//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	return 0;
 }
 
+//This is to be worked on later
+/*
 void print(std::ostream os, Head a, Section b, Nav c)
 {
 	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
@@ -67,15 +79,12 @@ void print(std::ostream os, Head a, Section b, Nav c)
 	os << "<h1>" << b.getSectionTitle() << "</h1>\n";
 	os << b.getSectionTagClose() << std::endl;
 	os << c.getNavTagOpen() << std::endl;
-	int five = 5;
-	int four = 4;
 	for (int i = 0; i < c.getTitleVector.size(); i++)
 	{
-		std::cout << "<a href='#Trying'>" << c.getNavFormat1 << c.getLinkVector[i] << c.getNavFormat2 << c.getTitleVector[i] << "</a>" << c.getNavFormat3 << std::endl;
+		std::cout << "<a href='#Trying'>" << c.getNavFormat1() << c.getLinkVector[i] << c.getNavFormat2 << c.getTitleVector[i] << "</a>" << c.getNavFormat3() << std::endl;
 	}
 	////
 	////
 	////
 	os << "</header>" << std::endl;
-
-}
+}*/
