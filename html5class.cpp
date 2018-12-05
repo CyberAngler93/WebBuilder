@@ -9,7 +9,7 @@ void Head::print(std::ostream & os){
   os << _headTagOpen << "\n";
   os << _meta << "\n";
   os << "<title>" << _headTitle << "</title>\n";
-  os << "<link rel=\"stylesheet" << "\" href=" << _cssFile << "\">\n";
+  os << "<link rel=\"stylesheet" << "\" href= \"" << _cssFile << "\">\n";
   os << _headTagClose << "\n";
   os << " <body>\n";
 }
@@ -86,20 +86,35 @@ std::string Section::getSectionTitle()
 	return _sectionTitle;
 }
 
-std::string Section::getSectionImage()
+void Section::print(std::ostream & os)
 {
-	return _sectionImage;
+	os << _sectionTagOpen << "\n";
+	os << "<h1>"  << _sectionTitle << "</h1>\n";
+	if (!_sectionImage.empty())
+	{
+		  os << "This needs to be fixed for images!\n";
+	}
+	else if (!_paragraph.empty())
+	{
+		os << _paragraph;
+	}
+	//os << "This needs to be fixed for images and texts!\n";
+	os << _sectionTagClose << "\n";
 }
 
-void Section::print(std::ostream & os){
-  os << _sectionTagOpen << "\n";
-  os << "<h1>"  << _sectionTitle << "</h1>\n";
-  os << "This needs to be fixed for images and texts!\n";
-  os << _sectionTagClose << "\n";
-
+void Section::setParagraph(std::string phrases)
+{
+	_paragraph += phrases;
 }
 
-Section::Section(std::string userTitle): _sectionTitle(userTitle), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+std::string Section::getParagraph()
+{
+	return _paragraph;
+}
+Section::Section()
+{}
+
+Section::Section(std::string userTitle): _sectionTitle(userTitle), _sectionImage(""), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
 {}
 
 Section::Section(std::string userTitle,std::string userImage): _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")

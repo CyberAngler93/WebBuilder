@@ -1,4 +1,4 @@
-/*This is the main operations for website builder made by Matt Perry and
+/*This is the main operations for website builder made by Matt Perry and Tailon Russell
 For cs202 Fall 2018
 An auto html5 writing lib
 
@@ -18,6 +18,7 @@ std::string title;
 std::string link;
 std::string command;
 std::string yOrN;
+std::string phrase;
 int numOfTabs;
 
 //this is the print function defined for outputing our objects to an ofstream
@@ -51,6 +52,8 @@ int main()
 	std::cout << "Enter the filepath of the css file" << std::endl;
 	getline(std::cin, link);
 	Head userHead(title, link);
+	Section userFirstSection(title);
+	sections.push_back(userFirstSection);
 	std::cout << "Would you like to make a section?(y/n)" << std::endl;
 	//while loop for error checking on the input from users becasue users are mean.
 	while(true){
@@ -67,8 +70,43 @@ int main()
 	{
 		std::cout << "What is the title of the section?" << std::endl;
 		getline(std::cin, title);
-		Section userSection(title);
-		sections.push_back(userSection);
+		Section a(title);
+		std::cout << "Do you want a paragraph or image in this section?" << std::endl;
+		while (true) 
+		{
+			getline(std::cin, yOrN);
+			if (yOrN == "paragraph" || yOrN == "image") 
+			{
+				break;
+			}
+			else {
+				std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
+			}
+		}
+		if (yOrN == "paragraph")
+		{
+			std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
+			while (getline(std::cin, phrase))
+			{
+				if (phrase == "exit")
+				{
+					if (phrase == "exit")
+					{
+						break;
+					}
+				}
+				else
+				{
+					a.setParagraph(phrase + " ");
+				}
+			}
+			sections.push_back(a);
+		}
+		else if (yOrN == "image")
+		{
+			std::cout << "somehow you are here and its erroring out" << std::endl;
+		}
+
 		std::cout << "Do you want tabs? (y/n)" << std::endl;
 		//while loop for error checking on the input from users becasue users are mean.
 		while(true){
@@ -98,6 +136,17 @@ int main()
 			}
 			Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
 			navs.push_back(nav);
+			std::cout << "do you want to make another section? (y/n)" << std::endl;
+			//while loop for error checking on the input from users becasue users are mean.
+			while (true) {
+				getline(std::cin, command);
+				if (command == "y" || command == "n") {
+					break;
+				}
+				else {
+					std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
+				}
+			}
 
 		}
 		else if (yOrN == "n")
@@ -115,51 +164,13 @@ int main()
 			}
 		}
 		//if this string is shown some sort of logic has failed us. you are our last hope obi-wan
-		else{
+		else
+		{
 			std::cout << "somehow you are here and its erroring out" << std::endl;
 		}
-		std::cout << "do you want to make another section? (y/n)" << std::endl;
-		//while loop for error checking on the input from users becasue users are mean.
-		while(true){
-			getline(std::cin,command);
-			if(command == "y" || command == "n"){
-				break;
-			}
-			else{
-				std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-			}
-		}
-
 	}
 	print(writingIndex , userHead, navs, sections);
 	//Part of Print function//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	std::cout << "Hey its worked" << std::endl;
 	return 0;
 	}
-
-
-//This is to be worked on later
-/*
-void print(std::ostream os, Head a, Section b, Nav c)
-{
-	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
-	os << a.getHeadTagOpen() << "\n";
-	os << a.getMeta() << "\n";
-	os << "<title>" << a.getHeadTitle() << "</title>\n";
-	os << "<link rel=\"stylesheet" << "\" href=" << a.getCssFile() << "\">\n";
-	os << a.getHeadTagClose() << "\n";
-	os << " <body>\n";
-	os << "<header>\n";
-	os << b.getSectionTagOpen() << std::endl;
-	os << "<h1>" << b.getSectionTitle() << "</h1>\n";
-	os << b.getSectionTagClose() << std::endl;
-	os << c.getNavTagOpen() << std::endl;
-	for (int i = 0; i < c.getTitleVector.size(); i++)
-	{
-		std::cout << "<a href='#Trying'>" << c.getNavFormat1() << c.getLinkVector[i] << c.getNavFormat2 << c.getTitleVector[i] << "</a>" << c.getNavFormat3() << std::endl;
-	}
-	////
-	////
-	////
-	os << "</header>" << std::endl;
-}*/

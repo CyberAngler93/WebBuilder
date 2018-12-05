@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 //I added a Header class that has getters for the open and close tags. Only because I couldn't think of a better way to include header
 class HTML {
@@ -37,6 +38,8 @@ public:
 	void print(std::ostream &) override;
 	//this is for section with only title and paragraph
 	Section(std::string);
+	//This is so I can use the setters and getters
+	Section();
 	//this is for section with title and image
 	Section(std::string, std::string);
 	enum Position {LEFT, CENTER, RIGHT};
@@ -46,13 +49,15 @@ public:
 	std::string getSectionTagOpen();
 	std::string getSectionTagClose();
 	std::string getSectionTitle();
-	std::string getSectionImage();
+	void setParagraph(std::string);
+	std::string getParagraph();
 private:
 	std::string _sectionPostion;
 	std::string _sectionTagOpen;
 	std::string _sectionTagClose;
 	std::string _sectionTitle;
 	std::string _sectionImage;
+	std::string _paragraph;
 	int _position;
 };
 class Nav : public HTML {
