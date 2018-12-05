@@ -4,8 +4,7 @@
 #include <vector>
 #include <fstream>
 
-
-//This is supposed to be here
+//I added a Header class that has getters for the open and close tags. Only because I couldn't think of a better way to include header
 class HTML {
 public:
 	virtual void print(std::ostream &) = 0;
@@ -72,6 +71,16 @@ private:
 	int _navLen = 0;
 };
 
+class Header
+{
+public:
+	Header();
+	std::string getHeaderOpenTag();
+	std::string getHeaderCloseTag();
+private:
+	std::string _headerOpenTag;
+	std::string _headerCloseTag;
+};
 std::ostream & operator<<(std::ostream &, HTML &);
 
 #endif

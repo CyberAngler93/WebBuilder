@@ -130,3 +130,16 @@ Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _nav
     }
     _navLen = len/2;
 }
+
+Header::Header(): _headerOpenTag("<header>"), _headerCloseTag("</header>")
+{}
+
+std::string Header::getHeaderOpenTag()
+{
+	return _headerOpenTag;
+}
+
+std::string Header::getHeaderCloseTag()
+{
+	return _headerCloseTag;
+}
