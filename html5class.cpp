@@ -1,10 +1,5 @@
 #include "html5class.hpp"
 
-HTML::~HTML(){
-
-}
-
-
 std::ostream & operator<<(std::ostream & os, HTML & html){
   html.print(os);
   return os;
@@ -42,6 +37,49 @@ std::string Head::getFile(){
 std::string Head::getTitle(){
     return _headTitle;
 }
+
+std::string Head::getHeadTagOpen()
+{
+	return _headTagOpen;
+}
+std::string Head::getHeadTitle()
+{
+	return _headTitle;
+}
+std::string Head::getCssFile()
+{
+	return _cssFile;
+}
+std::string Head::getMeta()
+{
+	return _meta;
+}
+std::string Head::getHeadTagClose()
+{
+	return _headTagClose;
+}
+
+std::string Section::getSectionPostion()
+{
+	return _sectionPostion;
+}
+std::string Section::getSectionTagOpen()
+{
+	return _sectionTagOpen;
+}
+std::string Section::getSectionTagClose()
+{
+	return _sectionTagClose;
+}
+std::string Section::getSectionTitle()
+{
+	return _sectionTitle;
+}
+std::string Section::getSectionImage()
+{
+	return _sectionImage;
+}
+
 void Section::print(std::ostream & os){
   os << _sectionTagOpen << "\n";
   os << "<h1>"  << _sectionTitle << "</h1>\n";

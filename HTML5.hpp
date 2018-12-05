@@ -48,7 +48,6 @@ class HTML {
 public:
 
 	void print();
-private:
 };
 
 
