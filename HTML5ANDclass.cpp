@@ -12,17 +12,17 @@ int main()
 	std::cout << "Enter the filepath of the css file" << std::endl;
 	std::cin >> css;
 	Head a(title, css);
+	std::cin.ignore();
 	Section b(title);
 	std::vector<Nav> navs;
 	std::vector<Section> sections;
-	std::string title;
-	int numberOfTurns = 0;
 	std::string command = "y";
 	while (command == "y")
 	{
 		std::cout << "What is the title of the section?" << std::endl;
 		getline(std::cin, title);
 		Section c(title);
+		sections.push_back(c);
 		std::string yOrN;
 		std::cout << "Do you want tabs? (y/n)" << std::endl;
 		getline(std::cin, yOrN);
@@ -54,7 +54,6 @@ int main()
 
 		std::cout << "do you want to make another section? (y/n)" << std::endl;
 		getline(std::cin, command);
-		numberOfTurns++;
 	}
 
 
