@@ -10,7 +10,7 @@ int main(){
   std::string banna = "goodbye";
 
   Section b("Hi");
-  std::cout << b << "\n";
+   b.print(std::cout);
   std::vector<std::string> myVector;
   for(int i = 1; i <= 20; i++){
     if(i % 2 == 1){
