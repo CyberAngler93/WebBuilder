@@ -50,7 +50,6 @@ public:
 	std::string getSectionTagClose();
 	std::string getSectionTitle();
 	void setParagraph(std::string);
-	std::string getParagraph();
 private:
 	std::string _sectionPostion;
 	std::string _sectionTagOpen;
@@ -80,6 +79,7 @@ class Header
 {
 public:
 	Header();
+	~Header();
 	std::string getHeaderOpenTag();
 	std::string getHeaderCloseTag();
 private:

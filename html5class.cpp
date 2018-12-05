@@ -14,20 +14,16 @@ void Head::print(std::ostream & os){
   os << " <body>\n";
 }
 
-Head::~Head(){
 
-}
 
-Section::~Section(){
-
-}
-
-Nav::~Nav(){
-
-}
 
 Head::Head(std::string userTitle, std::string userStyle): _headTagOpen("  <head>"), _headTitle(userTitle), _cssFile(userStyle), _meta("    <meta charset=\"utf-8\">"), _headTagClose(" </head>")
 {}
+
+Head::~Head() {
+
+}
+
 
 void Head::setTitle(std::string userTitle){
     _headTitle = userTitle;
@@ -65,6 +61,19 @@ std::string Head::getHeadTagClose()
 {
 	return _headTagClose;
 }
+
+
+
+
+
+Section::Section(std::string userTitle) : _sectionTitle(userTitle), _sectionImage(""), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+{}
+
+Section::Section(std::string userTitle, std::string userImage) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+{}
+
+Section::Section(std::string userTitle, std::string userImage, int position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position)
+{}
 
 std::string Section::getSectionPostion()
 {
@@ -107,21 +116,12 @@ void Section::setParagraph(std::string phrases)
 	_paragraph += phrases;
 }
 
-std::string Section::getParagraph()
-{
-	return _paragraph;
+Section::~Section() {
+
 }
-Section::Section()
-{}
 
-Section::Section(std::string userTitle): _sectionTitle(userTitle), _sectionImage(""), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
-{}
 
-Section::Section(std::string userTitle,std::string userImage): _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
-{}
 
-Section::Section(std::string userTitle, std::string userImage, int position): _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position)
-{}
 
 void Nav::print(std::ostream & os){
   os << _navTagOpen << "\n";
@@ -145,6 +145,11 @@ Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _nav
     }
     _navLen = len/2;
 }
+Nav::~Nav() {
+
+}
+
+
 
 Header::Header(): _headerOpenTag("<header>"), _headerCloseTag("</header>")
 {}
@@ -157,4 +162,9 @@ std::string Header::getHeaderOpenTag()
 std::string Header::getHeaderCloseTag()
 {
 	return _headerCloseTag;
+}
+
+Header::~Header()
+{
+
 }
