@@ -72,7 +72,7 @@ Section::Section(std::string userTitle) : _sectionTitle(userTitle), _sectionImag
 Section::Section(std::string userTitle, std::string userImage) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
 {}
 
-Section::Section(std::string userTitle, std::string userImage, int position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position), _sectionImageTagOpen("<section title=\"")
+Section::Section(std::string userTitle, std::string userImage, Position position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>"), _position(position), _sectionImageTagOpen("<section title=\"")
 {}
 
 std::string Section::getSectionPostion()
@@ -97,6 +97,7 @@ std::string Section::getSectionTitle()
 
 void Section::print(std::ostream & os)
 {
+  os << "we are making to this stage in the system" << std::endl;
 	if (!_sectionImage.empty())
 	{
 		os << _sectionImageTagOpen << _id << "\">\n";
@@ -118,22 +119,22 @@ void Section::setParagraph(std::string phrases)
 {
 	_paragraph += phrases;
 }
-
+/*
 void Section::setImageSectPostion(int position)
 {
 	_position = position;
 }
-
+*/
 void Section::setImage(std::string file)
 {
 	_sectionImage = file;
 }
 
-void Section::setImageId(int ID)
+/*void Section::setImageId(int ID)
 {
 	_id = ID;
 }
-
+*/
 
 Section::~Section() {
 
@@ -143,11 +144,11 @@ Section::~Section() {
 
 
 void Nav::print(std::ostream & os){
-  os << _navTagOpen << "\n";
+  os << _navTagOpen;
   for (int i  = 0; i < _navLen; i++){
-  os << _navFormat1 << _linkVector[i] << _navFormat2 << _titleVector[i] << _navFormat3 << "\n";
+  os << _navFormat1 << _linkVector[i] << _navFormat2 << _titleVector[i] << _navFormat3;
   }
-  os << _navTagClose << "\n";
+  os << _navTagClose;
 }
 
 Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _navTagOpen("<nav>"), _navFormat1("<a href = \""), _navFormat2("\"> "), _navFormat3(" </a>\n")

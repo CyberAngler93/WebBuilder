@@ -5,42 +5,178 @@ An auto html5 writing lib
 */
 
 
-
 #include "html5class.hpp"
 #include <iostream>
+#include <sstream>
 
-//declaration of our variables
-std::ofstream writingIndex("index.html");
-std::vector<Nav> navs;
-std::vector<Section> sections;
-std::vector<std::string> vectOfTabs;
-std::string title;
-std::string link;
-std::string command;
-std::string yOrN;
-std::string phrase;
-std::string imageFile;
-int numOfPics;
-int imagePosition;
-int numOfTabs;
+
+
+
+//this is handleinput checking for numbers! if oyu want a number from the user lets use this!
+void handleInputWithChecking(std::istream & is,std::stringstream & ss, std::string question, int & userAnswer){
+		std::string input = "";
+		std::cout << 	question << std::endl;
+		while(true){
+			getline(is,input);
+			ss.str(input);
+			if(ss >> userAnswer){
+				if(userAnswer > 0 && userAnswer <= 10){
+					break;
+				}
+			}
+				std::cout << "Not a valid number please enter between 1 and 10" << std::endl;
+			}
+		}
+
+
+
+//this is the error checking function that takes an inputstream, question, string you need answer in, and type of question. feel free to add more types to questions
+void handleInputWithChecking(std::istream & is, std::string question, std::string & userAnswer,int typeOfQuestion){
+	std::cout << 	question << std::endl;
+		while(true){
+			getline(is,userAnswer);
+			if(typeOfQuestion == 1){
+				if(userAnswer == "y" || userAnswer == "n"){
+					break;
+				}else{
+					std::cout << "There was an error in your input please enter  ('y'/'n')" << std::endl;
+				}
+			}else if (typeOfQuestion == 2){
+				if(userAnswer == "paragraph" || userAnswer == "image" || userAnswer == "n"){
+					break;
+				}else{
+					std::cout << "There was an error in nyour input please enter 'paragraph'/'image'/'n'" << std::endl;
+				}
+			}else if (typeOfQuestion == 3){
+				if(!userAnswer.empty()){
+						break;
+				}
+				else{
+					std::cout << "there was an error in your input it must not be empty!" << std::endl;
+				}
+			}else if (typeOfQuestion == 4){
+				if(userAnswer == "left" || userAnswer == "right" || userAnswer == "center"){
+					break;
+				}else{
+					std::cout << "there was an error in your input needs to be 'left'/'right'/'center'" << std::endl;
+				}
+			}else if(typeOfQuestion == 5){
+				if(userAnswer == "exit" || userAnswer == "help" || userAnswer == "head"|| userAnswer == "nav" || userAnswer == "section"){
+					break;
+				}else{
+					std::cout << "invalid command passed please try again or type help!" << std::endl;
+				}
+			}
+	}
+}
+
+
+void makeHead(std::istream & is,std::vector<Head> & heads){
+	std::string title;
+	std::string link;
+	handleInputWithChecking(is,"Enter the title of the website",title,3);
+	handleInputWithChecking(is,"Enter the filepath for css file",link,3);
+	Head userHead(title, link);
+	heads.push_back(userHead);
+}
+
+
+void makeSections(std::istream & is, std::vector<Section> sections){
+		std::string userInput;
+		Position enumPosition;
+		std::string title;
+		handleInputWithChecking(is,"Do you want a paragraph or image in this section?",userInput,2);
+		while(true){
+			if (userInput == "paragraph")
+			{
+				handleInputWithChecking(is,"Enter the title of the Section",title,3);
+				Section userSection(title);
+				std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
+				while (getline(is, userInput))
+				{
+					if (userInput == "exit")
+					{
+							break;
+					}
+					else
+					{
+						userSection.setParagraph(userInput + " ");
+					}
+				}
+				if(userInput == "exit"){
+					sections.push_back(userSection);
+					break;
+				}
+			}
+			else if (userInput == "image")
+			{
+				handleInputWithChecking(is,"Enter the title of the Picture",title,3);
+				//numOfPics++
+				handleInputWithChecking(is,"Do you want it on the left, center, or right",userInput,3);
+				if(userInput == "left"){
+					enumPosition == LEFT;
+				}else if(userInput == "right"){
+					enumPosition == RIGHT;
+				}else{
+					enumPosition == CENTER;
+				}
+				handleInputWithChecking(is,"Enter the file for the picture, be sure to include it in the folder for the html",userInput,3);
+				Section userSection(title, userInput, enumPosition);
+				//b.setImageId(numOfPics);
+				sections.push_back(userSection);
+				break;
+				std::cout << "can't do this yet" << std::endl;
+			}
+			else{
+				std::cout << "this is broken land, you shouldnt be here." << std::endl;
+			}
+		}
+}
+
+
+//Make nav fucntion when you want to make a nav call this in main!
+void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
+	std::vector<std::string> vectOfTabs;
+	std::string input;
+	int numOfTabs = 0;
+	//this section is error prone, i think we should look to move it to getline so that the input is forced to be a int atleast
+	handleInputWithChecking(is,ss,"Enter the number of tabs",numOfTabs);
+	for (int i = 0; i < numOfTabs; i++) //This creates the amount of tabs(or pages) the user wants
+	{
+		//link input
+		handleInputWithChecking(is,"Enter the link of the tab",input,3);
+		vectOfTabs.push_back(input);
+		//title input
+		handleInputWithChecking(is,"Enter the title of the tab",input,3);
+		vectOfTabs.push_back(input);
+	}
+	Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
+	navs.push_back(nav);
+}
 
 //this is the print function defined for outputing our objects to an ofstream
 //needs some tweaking to get rocking and rolling
 
-void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec){
+void print(std::ostream & os,std::vector<Head> & head,std::vector<Nav> & nav, std::vector<Section> & sec){
 	int navLen = nav.size();
 	int secLen = sec.size();
+	int headLen = head.size();
+	os << navLen << secLen << headLen << std::endl;
 	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
-	head.print(os);
-	os << "<header>" << std::endl;
+	for(int i = 0; i < headLen; i ++){
+		head[i].print(os);
+	}
+	//why this random head tags??
+	//os << "<header>" << std::endl;
 	for(int i = 0; i < navLen; i++){
 		nav[i].print(os);
 	}
-	os << "</header>" << std::endl;
+	//why random head tags???
+//	os << "</header>" << std::endl;
 	for(int i = 0; i < secLen; i++){
 		sec[i].print(os);
 	}
-	os << "we doin it" << std::endl;
+	os << "</body> \n </html>" << std::endl;
 
 }
 
@@ -49,140 +185,42 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 
 int main()
 {
+	//declaration of our variables
+	std::stringstream ss;
+	std::ofstream writingIndex("index.html");
+	std::vector<Nav> vectorNavs;
+	std::vector<Section> vectorSections;
+	std::vector<Head> vectorHeads;
+	std::string userInput;
 	//introduction to the website
 	std::cout << "Welcome to Web Builder!" << std::endl;
-	std::cout << "Enter the title of the website" << std::endl;
-	//switching this to getline so that we can have spaces in the title of our website?
-	getline(std::cin, title);
-	std::cout << "Enter the filepath of the css file" << std::endl;
-	getline(std::cin, link);
-	Head userHead(title, link);
-	Section userFirstSection(title);
-	sections.push_back(userFirstSection);
-	std::cout << "Would you like to make a section?(y/n)" << std::endl;
-	//while loop for error checking on the input from users becasue users are mean.
+	std::cout << "This was created by Matt and Tailon" << std::endl;
+	std::cout << "you make type help for a command list" << std::endl;
+	std::cout << "otherwise type head section nav or exit to leave" << std::endl;
 	while(true){
-		getline(std::cin,command);
-		if(command == "y" || command == "n"){
+		handleInputWithChecking(std::cin,"What would you like to do?",userInput,5);
+		if(userInput == "head"){
+			makeHead(std::cin,vectorHeads);
+		}
+		else if(userInput == "nav"){
+			makeNav(std::cin,ss,vectorNavs);
+		}
+		else if(userInput == "section"){
+			makeSections(std::cin,vectorSections);
+		}
+		else if(userInput == "help"){
+			std::cout << "Welcome to Web Builder!" << std::endl;
+			std::cout << "This was created by Matt and Tailon" << std::endl;
+			std::cout << "Commands include 'help' , 'exit' , 'head' , 'nav' and 'section'" << std::endl;
+		}
+		else if(userInput == "exit") {
 			break;
 		}
-		else{
-			std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-		}
 	}
 
-	while (command == "y")
-	{
-		std::cout << "What is the title of the section?" << std::endl;
-		getline(std::cin, title);
-		Section a(title);
-		std::cout << "Do you want a paragraph or image in this section?" << std::endl;
-		while (true) 
-		{
-			getline(std::cin, yOrN);
-			if (yOrN == "paragraph" || yOrN == "image") 
-			{
-				break;
-			}
-			else {
-				std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-			}
-		}
-		if (yOrN == "paragraph")
-		{
-			std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
-			while (getline(std::cin, phrase))
-			{
-				if (phrase == "exit")
-				{
-					if (phrase == "exit")
-					{
-						break;
-					}
-				}
-				else
-				{
-					a.setParagraph(phrase + " ");
-				}
-			}
-			sections.push_back(a);
-		}
-		else if (yOrN == "image")
-		{
-			numOfPics++;
-			std::cout << "Enter the file for the picture, be sure to include it in the folder for the html" << std::endl;
-			getline(std::cin, imageFile);
-			std::cout << "Do you want it on the left, center, or right, enter 0, 1, or 2" << std::endl;
-			std::cin >> imagePosition;
-			Section b(title, imageFile, imagePosition);
-			b.setImageId(numOfPics);
-			sections.push_back(b);
-			std::cout << "can't do this yet" << std::endl;
-		}
-		std::cin.ignore();
-		std::cout << "Do you want tabs? (y/n)" << std::endl;
-		//while loop for error checking on the input from users becasue users are mean.
-		while(true){
-			getline(std::cin, yOrN);
-			if(yOrN == "y" || yOrN == "n"){
-				break;
-			}
-			else {
-				std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-			}
-		}
+	std::cout << "Your website is now being created!" << std::endl;
 
-		if (yOrN == "y")
-		{
-			//this section is error prone, i think we should look to move it to getline so that the input is forced to be a int atleast
-			std::cout << "Enter the number of tabs" << std::endl;
-			std::cin >> numOfTabs;
-			std::cin.ignore();
-			for (int i = 0; i < numOfTabs; i++) //This creates the amount of tabs(or pages) the user wants
-			{
-				std::cout << "Enter the link of the tab" << std::endl;
-				getline(std::cin, link);
-				vectOfTabs.push_back(link);
-				std::cout << "Enter the name of a tab" << std::endl;
-				getline(std::cin, title);
-				vectOfTabs.push_back(title);
-			}
-			Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
-			navs.push_back(nav);
-			std::cout << "do you want to make another section? (y/n)" << std::endl;
-			//while loop for error checking on the input from users becasue users are mean.
-			while (true) {
-				getline(std::cin, command);
-				if (command == "y" || command == "n") {
-					break;
-				}
-				else {
-					std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-				}
-			}
-
-		}
-		else if (yOrN == "n")
-		{
-			std::cout << "do you want to make another section? (y/n)" << std::endl;
-			//while loop for error checking on the input from users becasue users are mean.
-			while(true){
-				getline(std::cin,command);
-				if(command == "y" || command == "n"){
-					break;
-				}
-				else{
-					std::cout << "there was an error in your input please enter ('y'/'n')" << std::endl;
-				}
-			}
-		}
-		//if this string is shown some sort of logic has failed us. you are our last hope obi-wan
-		else
-		{
-			std::cout << "somehow you are here and its erroring out" << std::endl;
-		}
-	}
-	print(writingIndex , userHead, navs, sections);
+	print(writingIndex , vectorHeads, vectorNavs, vectorSections);
 	//Part of Print function//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	std::cout << "Hey its worked" << std::endl;
 	return 0;

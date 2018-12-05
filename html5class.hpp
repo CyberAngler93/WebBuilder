@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+
+enum Position {LEFT, CENTER, RIGHT};
 //I added a Header class that has getters for the open and close tags. Only because I couldn't think of a better way to include header
 class HTML {
 public:
@@ -42,8 +44,7 @@ public:
 	Section();
 	//this is for section with title and image
 	Section(std::string, std::string);
-	enum Position {LEFT, CENTER, RIGHT};
-	Section(std::string, std::string, int);
+	Section(std::string, std::string, Position);
 	~Section();
 	std::string getSectionPostion();
 	void setImageSectPostion(int);
@@ -52,7 +53,7 @@ public:
 	std::string getSectionTitle();
 	void setParagraph(std::string);
 	void setImage(std::string);
-	void setImageId(int);
+//	void setImageId(int);
 private:
 	std::string _sectionPostion;
 	std::string _sectionTagOpen;
@@ -61,7 +62,7 @@ private:
 	std::string _sectionTitle;
 	std::string _sectionImage;
 	std::string _paragraph;
-	int _position;
+	Position _position;
 	int _id;
 };
 class Nav : public HTML {
