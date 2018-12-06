@@ -1,0 +1,35 @@
+.center{
+  margin-right: auto;
+  margin-left:auto;
+  height: 500px;
+  width: 500px;
+}
+
+.left{
+  height: 500px;
+  width: 500px;
+}
+.right{
+  margin-right:0px;
+  margin-left: auto;
+  height: 500px;
+  width: 500px;
+}
+.fred {
+  color:red;
+}
+.fblue{
+  color:blue;
+}
+.fgreen{
+  color:green;
+}
+.bgred{
+  background-color:red;
+}
+.bgblue{
+  background-color:blue;
+}
+.bggreen{
+  background-color:green;
+}
