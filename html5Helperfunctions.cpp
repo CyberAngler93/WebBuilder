@@ -58,14 +58,14 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 
 void makeSections(std::istream & is, std::vector<Section> & sections){
 		std::string userInput;
-		Position enumPosition;
+		Position enumPosition = LEFT;
 		std::string title;
 		handleInputWithChecking(is,"Do you want a paragraph or image in this section?",userInput,2);
 		while(true){
 			if (userInput == "paragraph")
 			{
 				handleInputWithChecking(is,"Enter the title of the Section",title,3);
-				Section userSection(title, "style.css");
+				Section userSection(title);
 				std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
 				while (getline(is, userInput))
 				{
