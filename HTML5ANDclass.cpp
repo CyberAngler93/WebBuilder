@@ -8,7 +8,7 @@ An auto html5 writing lib
 #include "html5class.hpp"
 #include <iostream>
 #include <sstream>
-//#include "windows.h"
+#include <windows.h>
 
 
 
@@ -48,6 +48,7 @@ int main()
 				std::cout << i.getSectionTitle() << " ";
 			}
 			std::cout << "\n";
+			std::cout << "You must enter one name from these sections you created for each tab you will create" << std::endl;
 		}
 			Section secy;
 			vectorSections.push_back(secy);
@@ -68,10 +69,10 @@ int main()
 		}
 	}
 
+
 	std::cout << "Your website is now being created!" << std::endl;
 
 	print(writingIndex , userHead, vectorNavs, vectorSections,userColor,userImage);
-	//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
-	std::cout << "Hey its worked" << std::endl;
+	ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	return 0;
 	}
