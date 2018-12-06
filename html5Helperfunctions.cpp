@@ -121,13 +121,12 @@ void makeSections(std::istream & is, std::vector<Section> & sections){
 				handleInputWithChecking(is,"Enter the file for the picture, be sure to include it in the folder for the html",userInput,3);
 				Section userSection(title, userInput, enumPosition);
 				//b.setImageId(numOfPics);
-				std::cout << "This is enumPosition: " << enumPosition << std::endl;
+			//	std::cout << "This is enumPosition: " << enumPosition << std::endl;
 				//insert style set function here some function to create the tags to push into the memeber variables!
 
 				userSection.setSectionStyle(userInput);
 				sections.push_back(userSection);
 				break;
-				std::cout << "can't do this yet" << std::endl;
 			}
 			else{
 				std::cout << "this is broken land, you shouldnt be here." << std::endl;
