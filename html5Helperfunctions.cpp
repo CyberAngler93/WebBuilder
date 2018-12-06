@@ -4,14 +4,16 @@
 
 //The last function is me trying to make the title of section be the title of _sectionTagParameter
 //std::vector<std::string> tabTitles;
-std::string _sectionTagParameter;
+//std::string _sectionTagParameter;
 
 //this is handleinput checking for numbers! if oyu want a number from the user lets use this!
 void handleInputWithChecking(std::istream & is,std::stringstream & ss, std::string question, int & userAnswer){
 		std::string input = "";
 		std::cout << 	question << std::endl;
+		userAnswer = 0;
 		while(true){
 			getline(is,input);
+			ss.clear();
 			ss.str(input);
 			if(ss >> userAnswer){
 				if(userAnswer > 0 && userAnswer <= 10){
@@ -129,6 +131,7 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
 	int numOfTabs = 0;
 	//this section is error prone, i think we should look to move it to getline so that the input is forced to be a int atleast
 	handleInputWithChecking(is,ss,"Enter the number of tabs",numOfTabs);
+	ss.str(std::string());
 	for (int i = 0; i < numOfTabs; i++) //This creates the amount of tabs(or pages) the user wants
 	{
 		//link input
@@ -140,6 +143,7 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
 	}
 	Nav nav(vectOfTabs); //This creates tabs to other pages on the website if the user wants that
 	navs.push_back(nav);
+
 }
 
 //this is the print function defined for outputing our objects to an ofstream

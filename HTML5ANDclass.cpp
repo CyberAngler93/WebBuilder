@@ -41,12 +41,12 @@ int main()
 			}
 			std::cout << "\n";
 		}
-			Section secy();
+			Section secy;
 			vectorSections.push_back(secy);
 			makeNav(std::cin,ss,vectorNavs);
 		}
 		else if(userInput == "section"){
-			Nav navy();
+			Nav navy;
 			vectorNavs.push_back(navy);
 			makeSections(std::cin,vectorSections);
 		}
