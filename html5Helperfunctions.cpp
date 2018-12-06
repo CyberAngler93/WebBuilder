@@ -59,6 +59,18 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 				}else{
 					std::cout << "invalid command passed please try again or type help!" << std::endl;
 				}
+			}else if(typeOfQuestion == 6){
+				if(userAnswer == "image" || userAnswer == "color"){
+					break;
+				}else{
+					std::cout << "invalid choice, pick image or color" << std::endl;
+				}
+			}else if (typeOfQuestion == 7){
+				if(userAnswer == "red" ||userAnswer == "blue" ||userAnswer == "green" ||userAnswer == "orange" ||userAnswer == "purple"){
+					break;
+				}else{
+					std::cout << "invalid choice, pick red,blue,green,orange or purple" <<  std::endl;
+				}
 			}
 		}
 }
@@ -149,11 +161,14 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
 //this is the print function defined for outputing our objects to an ofstream
 //needs some tweaking to get rocking and rolling
 
-void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec){
+void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec,std::string color, std::string imageurl){
 	int navLen = nav.size();
 	int secLen = sec.size();
-	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
-
+	if(color.empty() && !imageurl.empty() ){
+		os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background:url(" << imageurl << "); no repeat center center fixed;\n";
+	}else if (!color.empty() && imageurl.empty()){
+			os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background-color:" << color << ";\n";
+	}
 	head.print(os);
 	//why this random head tags??
 	//os << "<header>" << std::endl;

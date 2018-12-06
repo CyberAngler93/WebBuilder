@@ -14,7 +14,7 @@ void makeSections(std::istream & is, std::vector<Section> & sections);
 void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs);
 //this is the print function defined for outputing our objects to an ofstream
 //needs some tweaking to get rocking and rolling
-void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec);
+void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec,std::string ,std::string);
 
 //void setSectionTagParameter(Section &);
 

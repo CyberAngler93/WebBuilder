@@ -22,9 +22,17 @@ int main()
 	std::vector<Nav> vectorNavs;
 	std::vector<Section> vectorSections;
 	std::string userInput;
+	std::string userColor = "";
+	std::string userImage = "";
 	//introduction to the website
 	std::cout << "Welcome to Web Builder!" << std::endl;
 	std::cout << "This was created by Matt and Tailon" << std::endl;
+	handleInputWithChecking(std::cin,"Would you like an image or just color for a background?",userInput,6);
+	if(userInput == "color"){
+		handleInputWithChecking(std::cin,"Enter a color!",userColor,7);
+	}else if(userInput == "image"){
+		handleInputWithChecking(std::cin,"Enter a link to an image",userImage,3);
+	}
 	handleInputWithChecking(std::cin,"Enter the title of the website",userInput,3);
 	Head userHead(userInput,"style.css");
 	std::cout << "You may type help for a command list" << std::endl;
@@ -62,7 +70,7 @@ int main()
 
 	std::cout << "Your website is now being created!" << std::endl;
 
-	print(writingIndex , userHead, vectorNavs, vectorSections);
+	print(writingIndex , userHead, vectorNavs, vectorSections,userColor,userImage);
 	//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	std::cout << "Hey its worked" << std::endl;
 	return 0;
