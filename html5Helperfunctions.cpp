@@ -155,14 +155,15 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 	//os << "<header>" << std::endl;
 	for(int i = 0; i < navLen; i++){
 		nav[i].print(os);
+		sec[i].print(os);
 	}
 	//why random head tags???
 //	os << "</header>" << std::endl;
-	for(int i = 0; i < secLen; i++){
+/*	for(int i = 0; i < secLen; i++){
 		sec[i].print(os);
 	}
 	os << "</body> \n </html>" << std::endl;
-
+*/
 }
 /*
 void placeImage()

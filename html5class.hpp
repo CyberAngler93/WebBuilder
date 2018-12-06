@@ -72,6 +72,7 @@ private:
 class Nav : public HTML {
 public:
 	void print(std::ostream &) override;
+	Nav();
 	Nav(const std::vector<std::string> &);
 	//This is where the tabs will do something when you click on them
 	std::string navGoToLinks(std::string);

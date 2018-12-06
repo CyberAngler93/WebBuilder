@@ -27,7 +27,7 @@ int main()
 	std::cout << "This was created by Matt and Tailon" << std::endl;
 	handleInputWithChecking(std::cin,"Enter the title of the website",userInput,3);
 	Head userHead(userInput,"style.css");
-	std::cout << "You may type help for a command list\n" << std::endl;
+	std::cout << "You may type help for a command list" << std::endl;
 	std::cout << "You can type one three options: section, nav, or exit" << std::endl;
 	std::cout << "A nav is where you can create tabs to different parts of your website known as sections" << std::endl;
 	std::cout << "In a section you can write a paragraph or a insert an image" << std::endl;
@@ -39,10 +39,15 @@ int main()
 			for(auto i : vectorSections){
 				std::cout << i.getSectionTitle() << " ";
 			}
+			std::cout << "\n";
 		}
+			Section secy();
+			vectorSections.push_back(secy);
 			makeNav(std::cin,ss,vectorNavs);
 		}
 		else if(userInput == "section"){
+			Nav navy();
+			vectorNavs.push_back(navy);
 			makeSections(std::cin,vectorSections);
 		}
 		else if(userInput == "help"){
