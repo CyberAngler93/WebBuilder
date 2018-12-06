@@ -165,9 +165,9 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 	int navLen = nav.size();
 	int secLen = sec.size();
 	if(color.empty() && !imageurl.empty() ){
-		os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background:url(" << imageurl << "); no repeat center center fixed;\n";
+		os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background:url(" << imageurl << "); no repeat center center fixed;background-size:cover\">\n";
 	}else if (!color.empty() && imageurl.empty()){
-			os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background-color:" << color << ";\n";
+			os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = background-color:" << color << ";\">\n";
 	}
 	head.print(os);
 	//why this random head tags??
