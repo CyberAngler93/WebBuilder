@@ -100,7 +100,6 @@ std::string Section::getSectionTitle()
 
 void Section::print(std::ostream & os)
 {
-  os << "we are making to this stage in the system" << std::endl;
 	if (!_sectionImage.empty())
 	{
 		os << _sectionImageTagOpen << "\n";
@@ -154,7 +153,6 @@ std::string id = "\"t\"";
 
 void Section::setSectionTag(Position positions, std::string title)
 {
-	std::cout << "If you are seeing this then you are in setSectionTag and positions is: " << positions << std::endl;
 	if (positions == 0)
 	{
 		_sectionImageTagOpen = "<section title=\"" + title + "\" id = \"" + title + "\""">";
