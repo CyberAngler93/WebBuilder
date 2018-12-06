@@ -27,8 +27,10 @@ int main()
 	std::cout << "This was created by Matt and Tailon" << std::endl;
 	handleInputWithChecking(std::cin,"Enter the title of the website",userInput,3);
 	Head userHead(userInput,"style.css");
-	std::cout << "you may type help for a command list" << std::endl;
-	std::cout << "type section nav or exit to leave" << std::endl;
+	std::cout << "You may type help for a command list\n" << std::endl;
+	std::cout << "You can type one three options: section, nav, or exit" << std::endl;
+	std::cout << "A nav is where you can create tabs to different parts of your website known as sections" << std::endl;
+	std::cout << "In a section you can write a paragraph or a insert an image" << std::endl;
 	while(true){
 		handleInputWithChecking(std::cin,"What would you like to do?",userInput,5);
 	if(userInput == "nav"){

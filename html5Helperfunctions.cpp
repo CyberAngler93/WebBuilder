@@ -1,5 +1,10 @@
+//Helper functions definitions
 
 #include "html5Helperfunctions.hpp"
+
+//The last function is me trying to make the title of section be the title of _sectionTagParameter
+//std::vector<std::string> tabTitles;
+std::string _sectionTagParameter;
 
 //this is handleinput checking for numbers! if oyu want a number from the user lets use this!
 void handleInputWithChecking(std::istream & is,std::stringstream & ss, std::string question, int & userAnswer){
@@ -53,18 +58,20 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 					std::cout << "invalid command passed please try again or type help!" << std::endl;
 				}
 			}
-	}
+		}
 }
+
 
 void makeSections(std::istream & is, std::vector<Section> & sections){
 		std::string userInput;
-		Position enumPosition = LEFT;
 		std::string title;
+		Position enumPosition = LEFT;
 		handleInputWithChecking(is,"Do you want a paragraph or image in this section?",userInput,2);
 		while(true){
 			if (userInput == "paragraph")
 			{
 				handleInputWithChecking(is,"Enter the title of the Section",title,3);
+				//tabTitles.push_back(title);
 				Section userSection(title);
 				std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
 				while (getline(is, userInput))
@@ -91,18 +98,18 @@ void makeSections(std::istream & is, std::vector<Section> & sections){
 				//numOfPics++
 				handleInputWithChecking(is,"Do you want it on the left, center, or right",userInput,3);
 				if(userInput == "left"){
-					enumPosition == LEFT;
+					enumPosition = LEFT;
 				}else if(userInput == "right"){
-					enumPosition == RIGHT;
+					enumPosition = RIGHT;
 				}else{
-					enumPosition == CENTER;
+					enumPosition = CENTER;
 				}
 				handleInputWithChecking(is,"Enter the file for the picture, be sure to include it in the folder for the html",userInput,3);
 				Section userSection(title, userInput, enumPosition);
 				//b.setImageId(numOfPics);
-
+				std::cout << "This is enumPosition: " << enumPosition << std::endl;
 				//insert style set function here some function to create the tags to push into the memeber variables!
-
+				
 				userSection.setSectionStyle(userInput);
 				sections.push_back(userSection);
 				break;
@@ -156,4 +163,16 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 	}
 	os << "</body> \n </html>" << std::endl;
 
+}
+
+void placeImage()
+{
+
+}
+
+void setSectionTagParameter(std::string a)
+{
+	_sectionTagParameter = a;
+	std::cout << "This is the parameter: [" << _sectionTagParameter << "]" << std::endl;
+	std::cout << "This is title: [" << a << "]" << std::endl;
 }

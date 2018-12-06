@@ -7,6 +7,7 @@
 
 
 enum Position {LEFT, CENTER, RIGHT};
+
 //I added a Header class that has getters for the open and close tags. Only because I couldn't think of a better way to include header
 class HTML {
 public:
@@ -47,7 +48,8 @@ public:
 	Section(std::string, std::string, Position);
 	~Section();
 	std::string getSectionPostion();
-	void setImageSectPostion(int);
+	//This is where the style functions from css files are going to be put into section tags
+	void setSectionTag(Position, std::string);
 	std::string getSectionTagOpen();
 	std::string getSectionTagClose();
 	std::string getSectionTitle();
@@ -65,12 +67,13 @@ private:
 	std::string _paragraph;
 	std::string _styleTag;
 	Position _position;
-	int _id;
 };
 class Nav : public HTML {
 public:
 	void print(std::ostream &) override;
 	Nav(const std::vector<std::string> &);
+	//This is where the tabs will do something when you click on them
+	std::string navGoToLinks(std::string);
 	~Nav();
 private:
 	std::vector<std::string> _titleVector;
