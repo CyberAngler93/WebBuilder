@@ -8,7 +8,7 @@ An auto html5 writing lib
 #include "html5class.hpp"
 #include <iostream>
 #include <sstream>
-
+//#include "windows.h"
 
 
 
@@ -61,7 +61,7 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 					std::cout << "there was an error in your input needs to be 'left'/'right'/'center'" << std::endl;
 				}
 			}else if(typeOfQuestion == 5){
-				if(userAnswer == "exit" || userAnswer == "help" || userAnswer == "head"|| userAnswer == "nav" || userAnswer == "section"){
+				if(userAnswer == "exit" || userAnswer == "help" || userAnswer == "nav" || userAnswer == "section"){
 					break;
 				}else{
 					std::cout << "invalid command passed please try again or type help!" << std::endl;
@@ -71,17 +71,10 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 }
 
 
-void makeHead(std::istream & is,std::vector<Head> & heads){
-	std::string title;
-	std::string link;
-	handleInputWithChecking(is,"Enter the title of the website",title,3);
-	handleInputWithChecking(is,"Enter the filepath for css file",link,3);
-	Head userHead(title, link);
-	heads.push_back(userHead);
-}
 
 
-void makeSections(std::istream & is, std::vector<Section> sections){
+
+void makeSections(std::istream & is, std::vector<Section> & sections){
 		std::string userInput;
 		Position enumPosition;
 		std::string title;
@@ -90,12 +83,13 @@ void makeSections(std::istream & is, std::vector<Section> sections){
 			if (userInput == "paragraph")
 			{
 				handleInputWithChecking(is,"Enter the title of the Section",title,3);
-				Section userSection(title);
+				Section userSection(title, "style.css");
 				std::cout << "Enter exit when you are done entering your paragraph" << std::endl;
 				while (getline(is, userInput))
 				{
 					if (userInput == "exit")
 					{
+							sections.push_back(userSection);
 							break;
 					}
 					else
@@ -103,10 +97,7 @@ void makeSections(std::istream & is, std::vector<Section> sections){
 						userSection.setParagraph(userInput + " ");
 					}
 				}
-				if(userInput == "exit"){
-					sections.push_back(userSection);
-					break;
-				}
+			break;
 			}
 			else if (userInput == "image")
 			{
@@ -121,9 +112,9 @@ void makeSections(std::istream & is, std::vector<Section> sections){
 					enumPosition == CENTER;
 				}
 				handleInputWithChecking(is,"Enter the file for the picture, be sure to include it in the folder for the html",userInput,3);
-				Section userSection(title, userInput, enumPosition);
+				Section a(title, userInput, enumPosition);
 				//b.setImageId(numOfPics);
-				sections.push_back(userSection);
+				sections.push_back(a);
 				break;
 				std::cout << "can't do this yet" << std::endl;
 			}
@@ -131,6 +122,7 @@ void makeSections(std::istream & is, std::vector<Section> sections){
 				std::cout << "this is broken land, you shouldnt be here." << std::endl;
 			}
 		}
+
 }
 
 
@@ -157,15 +149,11 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
 //this is the print function defined for outputing our objects to an ofstream
 //needs some tweaking to get rocking and rolling
 
-void print(std::ostream & os,std::vector<Head> & head,std::vector<Nav> & nav, std::vector<Section> & sec){
+void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec){
 	int navLen = nav.size();
 	int secLen = sec.size();
-	int headLen = head.size();
-	os << navLen << secLen << headLen << std::endl;
 	os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr'>\n";
-	for(int i = 0; i < headLen; i ++){
-		head[i].print(os);
-	}
+	head.print(os);
 	//why this random head tags??
 	//os << "<header>" << std::endl;
 	for(int i = 0; i < navLen; i++){
@@ -190,19 +178,17 @@ int main()
 	std::ofstream writingIndex("index.html");
 	std::vector<Nav> vectorNavs;
 	std::vector<Section> vectorSections;
-	std::vector<Head> vectorHeads;
 	std::string userInput;
 	//introduction to the website
 	std::cout << "Welcome to Web Builder!" << std::endl;
 	std::cout << "This was created by Matt and Tailon" << std::endl;
-	std::cout << "you make type help for a command list" << std::endl;
-	std::cout << "otherwise type head section nav or exit to leave" << std::endl;
+	handleInputWithChecking(std::cin,"Enter the title of the website",userInput,3);
+	Head userHead(userInput,"style.css");
+	std::cout << "you may type help for a command list" << std::endl;
+	std::cout << "type section nav or exit to leave" << std::endl;
 	while(true){
 		handleInputWithChecking(std::cin,"What would you like to do?",userInput,5);
-		if(userInput == "head"){
-			makeHead(std::cin,vectorHeads);
-		}
-		else if(userInput == "nav"){
+	if(userInput == "nav"){
 			makeNav(std::cin,ss,vectorNavs);
 		}
 		else if(userInput == "section"){
@@ -220,8 +206,8 @@ int main()
 
 	std::cout << "Your website is now being created!" << std::endl;
 
-	print(writingIndex , vectorHeads, vectorNavs, vectorSections);
-	//Part of Print function//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
+	print(writingIndex , userHead, vectorNavs, vectorSections);
+	//ShellExecute(NULL, "open", "index.html", NULL, NULL, SW_SHOWNORMAL);
 	std::cout << "Hey its worked" << std::endl;
 	return 0;
 	}
