@@ -58,6 +58,7 @@ public:
 	void setSectionStyle(std::string);
 //	void setImageId(int);
 private:
+	std::string _sectionTagOpenPart2;
 	std::string _sectionPostion;
 	std::string _sectionTagOpen;
 	std::string _sectionImageTagOpen;

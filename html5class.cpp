@@ -66,10 +66,10 @@ std::string Head::getHeadTagClose()
 
 
 
-Section::Section(std::string userTitle) : _sectionTitle(userTitle), _sectionImage(""), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+Section::Section(std::string userTitle) : _sectionTitle(userTitle), _sectionImage(""), _sectionTagOpen("<section id =\""),_sectionTagOpenPart2("\">"), _sectionTagClose("</section>")
 {}
 
-Section::Section(std::string userTitle, std::string userImage) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"), _sectionTagClose("</section>")
+Section::Section(std::string userTitle, std::string userImage) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagOpen("<section>"),_sectionTagOpenPart2("\">"), _sectionTagClose("</section>")
 {}
 
 Section::Section(std::string userTitle, std::string userImage, Position position) : _sectionTitle(userTitle), _sectionImage(userImage), _sectionTagClose("</section>"), _position(position)
@@ -110,10 +110,10 @@ void Section::print(std::ostream & os)
 	}
 	else if (!_paragraph.empty())
 	{
-		os << _sectionTagOpen << "\n";
+		os << _sectionTagOpen << _sectionTitle << _sectionTagOpenPart2 << "\n";
 		os << "<h1>" << _sectionTitle << "</h1>\n";
 		os << "<p>" <<_paragraph << "</p>\n";
-	} 
+	}
 	//os << "This needs to be fixed for images and texts!\n";
 	os << _sectionTagClose << "\n";
 }
@@ -157,15 +157,15 @@ void Section::setSectionTag(Position positions, std::string title)
 	std::cout << "If you are seeing this then you are in setSectionTag and positions is: " << positions << std::endl;
 	if (positions == 0)
 	{
-		_sectionImageTagOpen = "<section title=\"" + title + "\" id = \"" + _sectionTagParameter + "\""">";
+		_sectionImageTagOpen = "<section title=\"" + title + "\" id = \"" + title + "\""">";
 	}
 	else if (positions == 1)
 	{
-		_sectionImageTagOpen = "<section class=\"center\" title=\"" + title + "\" id = \"" + _sectionTagParameter + "\""">";
+		_sectionImageTagOpen = "<section class=\"center\" title=\"" + title + "\" id = \"" + title + "\""">";
 	}
 	else if (positions == 2)
 	{
-		_sectionImageTagOpen = "<section class=\"right\" title=\"" + title + "\" id = \"" + _sectionTagParameter + "\""">";
+		_sectionImageTagOpen = "<section class=\"right\" title=\"" + title + "\" id = \"" + title + "\""">";
 	}
 }
 
@@ -174,8 +174,8 @@ void Section::setSectionTag(Position positions, std::string title)
 void Nav::print(std::ostream & os){
   os << _navTagOpen << "\n";
   for (int i  = 0; i < _navLen; i++){
-	  Section b(_linkVector[i]);
-	  b.setSectionTagParameter(b);
+	  //Section b(_linkVector[i]);
+	  //b.setSectionTagParameter(b);
   os << _navFormat1 << _linkVector[i] << _navFormat2 << _titleVector[i] << _navFormat3;
   }
   os << _navTagClose;
@@ -196,11 +196,6 @@ Nav::Nav(const std::vector<std::string> & userNav): _navTagClose("</nav>"), _nav
     _navLen = len/2;
 }
 
-std::string Nav::navGoToLinks(std::string linking)
-{
-	//std::cout << _navFormat1;
-	return _navFormat1;
-}
 
 Nav::~Nav() {
 

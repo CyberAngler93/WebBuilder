@@ -16,6 +16,6 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs);
 //needs some tweaking to get rocking and rolling
 void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec);
 
-void setSectionTagParameter(Section &);
+//void setSectionTagParameter(Section &);
 
 #endif

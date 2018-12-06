@@ -34,6 +34,12 @@ int main()
 	while(true){
 		handleInputWithChecking(std::cin,"What would you like to do?",userInput,5);
 	if(userInput == "nav"){
+		handleInputWithChecking(std::cin,"Would you like to link this nav to a section?",userInput,1);
+		if(userInput == "y"){
+			for(auto i : vectorSections){
+				std::cout << i.getSectionTitle() << " ";
+			}
+		}
 			makeNav(std::cin,ss,vectorNavs);
 		}
 		else if(userInput == "section"){
@@ -42,7 +48,7 @@ int main()
 		else if(userInput == "help"){
 			std::cout << "Welcome to Web Builder!" << std::endl;
 			std::cout << "This was created by Matt and Tailon" << std::endl;
-			std::cout << "Commands include 'help' , 'exit' , 'head' , 'nav' and 'section'" << std::endl;
+			std::cout << "Commands include 'help' , 'exit' , 'nav' and 'section'" << std::endl;
 		}
 		else if(userInput == "exit") {
 			break;

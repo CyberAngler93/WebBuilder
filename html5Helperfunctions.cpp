@@ -109,7 +109,7 @@ void makeSections(std::istream & is, std::vector<Section> & sections){
 				//b.setImageId(numOfPics);
 				std::cout << "This is enumPosition: " << enumPosition << std::endl;
 				//insert style set function here some function to create the tags to push into the memeber variables!
-				
+
 				userSection.setSectionStyle(userInput);
 				sections.push_back(userSection);
 				break;
@@ -164,7 +164,7 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 	os << "</body> \n </html>" << std::endl;
 
 }
-
+/*
 void placeImage()
 {
 
@@ -175,4 +175,4 @@ void setSectionTagParameter(std::string a)
 	_sectionTagParameter = a;
 	std::cout << "This is the parameter: [" << _sectionTagParameter << "]" << std::endl;
 	std::cout << "This is title: [" << a << "]" << std::endl;
-}
+}*/
