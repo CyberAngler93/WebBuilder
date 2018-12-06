@@ -95,6 +95,8 @@ std::string Section::getSectionTitle()
 	return _sectionTitle;
 }
 
+
+
 void Section::print(std::ostream & os)
 {
   os << "we are making to this stage in the system" << std::endl;
@@ -118,6 +120,10 @@ void Section::print(std::ostream & os)
 void Section::setParagraph(std::string phrases)
 {
 	_paragraph += phrases;
+}
+
+void Section::setSectionStyle(std::string tags){
+  _styleTag += tags;
 }
 /*
 void Section::setImageSectPostion(int position)

@@ -53,6 +53,7 @@ public:
 	std::string getSectionTitle();
 	void setParagraph(std::string);
 	void setImage(std::string);
+	void setSectionStyle(std::string);
 //	void setImageId(int);
 private:
 	std::string _sectionPostion;
@@ -62,6 +63,7 @@ private:
 	std::string _sectionTitle;
 	std::string _sectionImage;
 	std::string _paragraph;
+	std::string _styleTag;
 	Position _position;
 	int _id;
 };
