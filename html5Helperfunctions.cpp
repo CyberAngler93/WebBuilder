@@ -2,9 +2,6 @@
 
 #include "html5Helperfunctions.hpp"
 
-//The last function is me trying to make the title of section be the title of _sectionTagParameter
-//std::vector<std::string> tabTitles;
-//std::string _sectionTagParameter;
 
 //this is handleinput checking for numbers! if oyu want a number from the user lets use this!
 void handleInputWithChecking(std::istream & is,std::stringstream & ss, std::string question, int & userAnswer){
@@ -38,7 +35,7 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 				if(userAnswer == "paragraph" || userAnswer == "image" || userAnswer == "n"){
 					break;
 				}else{
-					std::cout << "There was an error in nyour input please enter 'paragraph'/'image'/'n'" << std::endl;
+					std::cout << "There was an error in your input please enter 'paragraph'/'image'/'n'" << std::endl;
 				}
 			}else if (typeOfQuestion == 3){
 				if(!userAnswer.empty()){
@@ -75,8 +72,9 @@ void handleInputWithChecking(std::istream & is, std::string question, std::strin
 		}
 }
 
-
+//making a seciton taking in a vector and istream by ref so we dont have too much memory accesss happening
 void makeSections(std::istream & is, std::vector<Section> & sections){
+		//some declarations to hold user input
 		std::string userInput;
 		std::string title;
 		Position enumPosition = LEFT;
@@ -100,9 +98,9 @@ void makeSections(std::istream & is, std::vector<Section> & sections){
 					}
 				}
 				//insert style function here to get tags?
+				//this will hopefully become a style question here soon!
 
-
-			userSection.setSectionStyle(userInput);
+			//userSection.setSectionStyle(userInput);
 			sections.push_back(userSection);
 			break;
 			}
@@ -120,11 +118,9 @@ void makeSections(std::istream & is, std::vector<Section> & sections){
 				}
 				handleInputWithChecking(is,"Enter the file for the picture, be sure to include it in the folder for the html",userInput,3);
 				Section userSection(title, userInput, enumPosition);
-				//b.setImageId(numOfPics);
-			//	std::cout << "This is enumPosition: " << enumPosition << std::endl;
 				//insert style set function here some function to create the tags to push into the memeber variables!
-
-				userSection.setSectionStyle(userInput);
+				//hopefully a method to create style can go here!
+				//userSection.setSectionStyle(userInput);
 				sections.push_back(userSection);
 				break;
 			}
@@ -158,8 +154,6 @@ void makeNav(std::istream & is,std::stringstream & ss,std::vector<Nav> & navs){
 }
 
 //this is the print function defined for outputing our objects to an ofstream
-//needs some tweaking to get rocking and rolling
-
 void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Section> & sec,std::string color, std::string imageurl){
 	int navLen = nav.size();
 	int secLen = sec.size();
@@ -169,29 +163,9 @@ void print(std::ostream & os,Head & head,std::vector<Nav> & nav, std::vector<Sec
 			os << "<!DOCTYPE html>\n<html lang = 'en' dir = 'ltr' style = \"background-color:" << color << ";\">\n";
 	}
 	head.print(os);
-	//why this random head tags??
-	//os << "<header>" << std::endl;
 	for(int i = 0; i < navLen; i++){
 		nav[i].print(os);
 		sec[i].print(os);
 	}
-	//why random head tags???
-//	os << "</header>" << std::endl;
-/*	for(int i = 0; i < secLen; i++){
-		sec[i].print(os);
-	}
-	os << "</body> \n </html>" << std::endl;
-*/
-}
-/*
-void placeImage()
-{
 
 }
-
-void setSectionTagParameter(std::string a)
-{
-	_sectionTagParameter = a;
-	std::cout << "This is the parameter: [" << _sectionTagParameter << "]" << std::endl;
-	std::cout << "This is title: [" << a << "]" << std::endl;
-}*/

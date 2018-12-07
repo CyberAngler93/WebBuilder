@@ -105,16 +105,15 @@ void Section::print(std::ostream & os)
 		os << _sectionImageTagOpen << "\n";
 		os << "<h1>" << _sectionTitle << "</h1>\n";
 		os << "<img src=\"" << _sectionImage <<"\"/>\n";
-		//os << "This needs to be fixed for images!\n";
+    os << _sectionTagClose << "\n";
 	}
 	else if (!_paragraph.empty())
 	{
 		os << _sectionTagOpen << _sectionTitle << _sectionTagOpenPart2 << "\n";
 		os << "<h1>" << _sectionTitle << "</h1>\n";
 		os << "<p>" <<_paragraph << "</p>\n";
+    os << _sectionTagClose << "\n";
 	}
-	//os << "This needs to be fixed for images and texts!\n";
-	os << _sectionTagClose << "\n";
 }
 
 void Section::setParagraph(std::string phrases)
@@ -125,22 +124,12 @@ void Section::setParagraph(std::string phrases)
 void Section::setSectionStyle(std::string tags){
   _styleTag += tags;
 }
-/*
-void Section::setImageSectPostion(int position)
-{
-	_position = position;
-}
-*/
+
 void Section::setImage(std::string file)
 {
 	_sectionImage = file;
 }
 
-/*void Section::setImageId(int ID)
-{
-	_id = ID;
-}
-*/
 
 Section::Section() {
 
@@ -172,8 +161,6 @@ Nav::Nav(){}
 void Nav::print(std::ostream & os){
   os << _navTagOpen << "\n";
   for (int i  = 0; i < _navLen; i++){
-	  //Section b(_linkVector[i]);
-	  //b.setSectionTagParameter(b);
   os << _navFormat1 << _linkVector[i] << _navFormat2 << _titleVector[i] << _navFormat3;
   }
   os << _navTagClose;
